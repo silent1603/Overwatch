@@ -1,4 +1,4 @@
-package com.et.overwatch
+package com.et.overwatch.Utils
 
 import android.annotation.SuppressLint
 import android.content.res.AssetManager
@@ -7,6 +7,7 @@ import android.view.SurfaceView
 import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleOwner
+import com.google.android.filament.Skybox
 import com.google.android.filament.View
 import com.google.android.filament.android.UiHelper
 import com.google.android.filament.utils.ModelViewer
@@ -64,7 +65,7 @@ class ModelRenderer {
         }
 
         // This is the other code needed to make the background transparent
-        modelViewer.scene.skybox = null
+        modelViewer.scene.skybox = Skybox.Builder().build(modelViewer.engine)
         modelViewer.view.blendMode = View.BlendMode.TRANSLUCENT
         modelViewer.renderer.clearOptions = modelViewer.renderer.clearOptions.apply {
             clear = true
@@ -91,7 +92,6 @@ class ModelRenderer {
                 rewind()
             }
         }
-
         modelViewer.loadModelGlb(buffer)
         modelViewer.transformToUnitCube()
     }
